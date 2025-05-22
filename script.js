@@ -93,12 +93,12 @@ for (let n = 0; n < lagufavorit.length; n++) {
   if (!audio || !button) continue; //mencegah adanya eror saat addEventListener (akan eror jika salah satunya tidak ada)
 
   button.addEventListener('click', () => {
-  // jika saat di click Hentikan audio/video sebelumnya (jika ada)
+  // jika ada audio lain yang diputar dan bukan audio yang sama maka berhentikan lagu sebelumnya dan reset waktu
   if (currentAudio && currentAudio !== audio) {
     currentAudio.pause(); //pause audio
     currentAudio.currentTime = 0; //mereset waktu audio
 
-    if (currentButton) { //currentButton bukan null maka button diganti menjadi play
+    if (currentButton) { //kalau ada button lain ditekan maka tombol sebelumnya kembali ke play
       currentButton.innerHTML = `<i class="material-icons">play_arrow</i>`;
     }
 
