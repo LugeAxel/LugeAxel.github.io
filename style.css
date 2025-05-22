@@ -27,6 +27,11 @@ body {
     position: relative;
     z-index: 1;
 }
+@media (max-width: 768px) {
+  .lagu {
+    width: 40%;
+  }
+}
 .lagu *:not(.video-background) {
     position: relative;
     z-index: 1;
