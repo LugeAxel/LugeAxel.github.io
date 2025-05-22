@@ -29,7 +29,7 @@ body {
 }
 @media (max-width: 768px) {
   .lagu {
-    width: 45%;
+    width: 42%;
   }
 }
 .lagu *:not(.video-background) {
