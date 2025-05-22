@@ -64,7 +64,7 @@ for (var n=0;n < lagufavorit.length;n++) {
     `<div class="lagu">
         <h4 class="bebasfont">${(n+1)+"."}</h4>
         <h2>
-            <a href="${lagufavorit[n].SongsLinks}">${lagufavorit[n].Judul}</a>
+            <a target="_blank" href="${lagufavorit[n].SongsLinks}">${lagufavorit[n].Judul}</a>
         </h2>
         <small>
             <i>${lagufavorit[n].Artis}</i>
@@ -93,39 +93,56 @@ for (let n = 0; n < lagufavorit.length; n++) {
   if (!audio || !button) continue; //mencegah adanya eror saat addEventListener (akan eror jika salah satunya tidak ada)
 
   button.addEventListener('click', () => {
-    // Jika ada audio lain yang sedang diputar, stop dulu
-    if (currentAudio && currentAudio !== audio) { //Apakah lagu yang sedang diputar berbeda dengan lagu yang akan diputar
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-      
-      if (currentButton) {
-        currentButton.innerHTML = `<i class="material-icons">play_arrow</i>`;
-      }
+  // jika saat di click Hentikan audio/video sebelumnya (jika ada)
+  if (currentAudio && currentAudio !== audio) {
+    currentAudio.pause(); //pause audio
+    currentAudio.currentTime = 0; //mereset waktu audio
+
+    if (currentButton) { //currentButton bukan null maka button diganti menjadi play
+      currentButton.innerHTML = `<i class="material-icons">play_arrow</i>`;
     }
 
-    // Toggle play/pause untuk audio 
-    if (audio.paused) {
-      audio.play();
-      button.innerHTML = `<i class="material-icons">pause</i>`;
-      currentAudio = audio;
-      currentButton = button;
+    // PENTINGGGGG! Sembunyikan semua video background (kalau audio yang akan diputar berbeda)
+    for (let i = 0; i < lagufavorit.length; i++) {
+      const prevVideo = document.getElementById(`videoBg${i}`);
+      prevVideo.innerHTML = '';
+      prevVideo.style.display = 'none';
+    }
+  }
 
-        if (lagufavorit[n].videoURL) {
-          const videoBg = document.getElementById(`videoBg${n}`);
-          videoBg.innerHTML = `
-            <video autoplay muted loop>
-              <source src="${lagufavorit[n].videoURL}" type="video/mp4">
-            </video>`;
-          videoBg.style.display = 'block';
-        }
-    } else {
-      audio.pause();
+  // Toggle pause/play audio
+  if (audio.paused) {
+    audio.play();
+    button.innerHTML = `<i class="material-icons">pause</i>`;
+    currentAudio = audio;
+    currentButton = button;
+
+    // Tampilkan video untuk lagu ini (cuma nampilin satu video!)
+    const videoBg = document.getElementById(`videoBg${n}`);
+    videoBg.innerHTML = `
+      <video autoplay muted loop>
+        <source src="${lagufavorit[n].videoURL}" type="video/mp4">
+      </video>`;
+    videoBg.style.display = 'block';
+
+    // Reset (video dan button) saat lagu selesai diputar
+    audio.onended = () => {
       button.innerHTML = `<i class="material-icons">play_arrow</i>`;
-      currentAudio = null;
-      currentButton = null;
-      const videoBg = document.getElementById(`videoBg${n}`);
       videoBg.innerHTML = '';
       videoBg.style.display = 'none';
-    }
-  });
+      currentAudio = null;
+      currentButton = null;
+    };
+
+  } else {
+    // Jika sedang diputar dan akan di pause (stop video background dan ganti button)
+    audio.pause();
+    button.innerHTML = `<i class="material-icons">play_arrow</i>`;
+    const videoBg = document.getElementById(`videoBg${n}`);
+    videoBg.innerHTML = '';
+    videoBg.style.display = 'none';
+    currentAudio = null;
+    currentButton = null;
+  }
+});
 }
