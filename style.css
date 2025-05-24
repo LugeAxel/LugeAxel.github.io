@@ -170,7 +170,7 @@ body {
     color: rgb(35, 35, 35);
 }
 
-#header img {
+.header img {
     object-fit: cover;
     width: 10%;
     height: 30px;
