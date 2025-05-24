@@ -52,6 +52,14 @@ var lagufavorit = [
       videoURL:'iwishclip.mp4',
       Images:'https://i.pinimg.com/736x/36/5e/75/365e75671926ecac006af9f6c47bf4ba.jpg',
       SongsLinks:'https://open.spotify.com/intl-id/track/0BUxAlVFVTpfl31Vr9byBT?si=6fdc069def6f4203'},
+    { Judul: 'Bok Choy',
+      Artis: 'BoyWithUke',
+      Likes: '456K',
+      Played: '3M',
+      Audiosongs: 'bokchoyboywithuke.mp3',
+      videoURL: 'bokchoy.mp4',
+      Images: 'https://i.pinimg.com/736x/dd/f6/60/ddf660379aaabf272c320293b208f4aa.jpg',
+      SongsLinks: 'https://open.spotify.com/intl-id/track/1XWoLnvkhFwQVcuVukL40f?si=532a175786e04987'},
 ];
   
 
