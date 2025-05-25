@@ -101,7 +101,7 @@ for (let n = 0; n < lagufavorit.length; n++) {
   if (!audio || !button) continue; //mencegah adanya eror saat addEventListener (akan eror jika salah satunya tidak ada)
 
   button.addEventListener('click', () => {
-  // jika ada audio lain yang diputar dan bukan audio yang sama maka berhentikan lagu sebelumnya dan reset waktu
+  // yang pertama mengecek currentAudio bernilai (bukan undefined/falsy), kedua mengecek jika currentAudio sama dengan yang diputar jika tidak maka akan langsung dipause dan reset waktu
   if (currentAudio && currentAudio !== audio) {
     currentAudio.pause(); //pause audio
     currentAudio.currentTime = 0; //mereset waktu audio
